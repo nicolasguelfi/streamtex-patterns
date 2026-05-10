@@ -1,0 +1,14 @@
+[preset]
+name = "minimal"
+description = "Just the 3 atoms — for projects that only need basic emphasis primitives"
+
+[patterns]
+include = [
+  "core/slide_heading.md",
+  "core/cite.md",
+  "core/inline_emphasis.md",
+]
+exclude = []
+
+[depends_on]
+extends = ""

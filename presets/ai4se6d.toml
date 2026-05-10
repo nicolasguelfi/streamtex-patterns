@@ -1,0 +1,14 @@
+[preset]
+name = "ai4se6d"
+description = "Full set used by the ai4se6d training collection (slides preset + project-specific)"
+
+[patterns]
+include = [
+  # everything from slides preset (extends below)
+  # plus project-specific patterns:
+  # "projects/ai4se6d/<...>.md"   # add as they emerge
+]
+exclude = []
+
+[depends_on]
+extends = "slides"

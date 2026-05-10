@@ -1,0 +1,16 @@
+[preset]
+name = "slides"
+description = "Slide-based courses, presentations, lecture decks (extends core)"
+
+[patterns]
+include = [
+  "slides/title_slide.md",
+  "slides/stat_hero.md",
+  "slides/evidence_insight.md",
+  "slides/exercise_flow.md",
+  "slides/categorized_grid.md",
+]
+exclude = []
+
+[depends_on]
+extends = "core"

@@ -1,0 +1,18 @@
+[preset]
+name = "core"
+description = "Universal patterns — atoms and molecules used in every project"
+
+[patterns]
+include = [
+  "core/slide_heading.md",
+  "core/cite.md",
+  "core/inline_emphasis.md",
+  "core/callout.md",
+  "core/card_grid.md",
+  "core/comparison_table.md",
+  "core/takeaways.md",
+]
+exclude = []
+
+[depends_on]
+extends = ""

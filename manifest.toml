@@ -1,0 +1,36 @@
+# streamtex-patterns — repo manifest
+#
+# Catalog of reusable StreamTeX graphic design patterns. Read by Claude
+# Code at block-generation time. Distributed to projects via
+# `stx patterns install --preset <name>`.
+
+[repo]
+name = "streamtex-patterns"
+version = "0.1.0"
+description = "Catalog of reusable StreamTeX graphic design patterns"
+spec_version = "A2"
+since = "2026-05-10"
+
+[scopes]
+core = "Universal patterns, cross-project (atoms, molecules, generic templates)"
+slides = "Slide-based courses and presentations"
+docs = "Documentation manuals (StreamTeX-style: code + explanation + demo)"
+projects = "Project-specific patterns that don't fit any other scope"
+
+[presets]
+core = "core.toml"
+slides = "slides.toml"
+docs = "docs.toml"
+minimal = "minimal.toml"
+ai4se6d = "ai4se6d.toml"
+
+[ci]
+validate_on_pr = true
+required_sections = [
+  "Visual",
+  "Structure",
+  "Styling rules",
+  "Code skeleton",
+  "When to use",
+  "When NOT to use",
+]
