@@ -1,0 +1,21 @@
+# Pre-commit hook for streamtex-patterns.
+#
+# Install once with:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Then `python scripts/validate.py --all` runs automatically before each commit.
+# Bypass with `git commit --no-verify` (not recommended).
+
+repos:
+  - repo: local
+    hooks:
+      - id: validate-patterns
+        name: Validate streamtex-patterns (A2 spec)
+        entry: python scripts/validate.py --all
+        language: system
+        pass_filenames: false
+        always_run: true
+        # PyYAML is the only runtime dependency — install it in the env
+        # used by pre-commit if not already available.
+        additional_dependencies: []
