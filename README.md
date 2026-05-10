@@ -2,8 +2,8 @@
 
 Reusable graphic design patterns for StreamTeX projects.
 
-A **pattern** is a markdown file with a name (e.g. `slide_heading`,
-`callout`, `stat_hero`) and a structured description of a visual
+A **pattern** is a markdown file with a name (e.g. `ptn_slide_heading`,
+`ptn_callout`, `ptn_stat_hero`) and a structured description of a visual
 primitive. Patterns are **read by Claude Code** when generating or
 editing StreamTeX blocks, and the AI is then expected to reproduce or
 extrapolate from them.
@@ -22,26 +22,26 @@ streamtex-patterns/
 ├── _pattern_library.md       # human-readable global index
 │
 ├── core/                     # universal, cross-project
-│   ├── slide_heading.md
-│   ├── cite.md
-│   ├── inline_emphasis.md
-│   ├── callout.md
-│   ├── card_grid.md
-│   ├── comparison_table.md
-│   └── takeaways.md
+│   ├── ptn_slide_heading.md
+│   ├── ptn_cite.md
+│   ├── ptn_inline_emphasis.md
+│   ├── ptn_callout.md
+│   ├── ptn_card_grid.md
+│   ├── ptn_comparison_table.md
+│   └── ptn_takeaways.md
 │
 ├── slides/                   # presentation / course-specific
-│   ├── title_slide.md
-│   ├── stat_hero.md
-│   ├── evidence_insight.md
-│   ├── exercise_flow.md
-│   └── categorized_grid.md
+│   ├── ptn_title_slide.md
+│   ├── ptn_stat_hero.md
+│   ├── ptn_evidence_insight.md
+│   ├── ptn_exercise_flow.md
+│   └── ptn_categorized_grid.md
 │
 ├── docs/                     # StreamTeX-docs-style manuals
-│   ├── manual_section.md
-│   ├── feature_walkthrough.md
-│   ├── api_reference_card.md
-│   └── composite_block.md
+│   ├── ptn_manual_section.md
+│   ├── ptn_feature_walkthrough.md
+│   ├── ptn_api_reference_card.md
+│   └── ptn_composite_block.md
 │
 ├── projects/                 # ultra-specific to one project
 │   ├── ai4se6d/
@@ -67,7 +67,7 @@ Every pattern file has YAML frontmatter + structured markdown sections:
 - `## When to use` / `## When NOT to use`
 - `## Examples` / `## Related patterns` (optional)
 
-See [`core/slide_heading.md`](core/slide_heading.md) for a complete
+See [`core/ptn_slide_heading.md`](core/ptn_slide_heading.md) for a complete
 example.
 
 ---
@@ -82,7 +82,7 @@ stx patterns install --preset slides
 stx patterns install --preset docs
 
 # Or pick individual patterns
-stx patterns install --pattern slide_heading,callout,stat_hero
+stx patterns install --pattern ptn_slide_heading,ptn_callout,ptn_stat_hero
 
 # Update (with drift detection)
 stx patterns update
@@ -91,7 +91,7 @@ stx patterns update
 stx patterns status
 
 # Promote a local edit back to this repo
-stx patterns promote callout
+stx patterns promote ptn_callout
 ```
 
 The CLI copies patterns into `<project>/.claude/custom/streamtex-patterns/`

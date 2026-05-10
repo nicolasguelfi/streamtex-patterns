@@ -1,5 +1,5 @@
 ---
-name: card_grid
+name: ptn_card_grid
 type: pattern
 description: Grid of equal-size cards with title and body, used for taxonomies and inventories
 tags: [grid, cards, taxonomy]
@@ -27,7 +27,7 @@ deserves a small visual container.
 ## Structure
 
 - Outer container: `st_block(<page_fill>)`.
-- Optional `slide_heading` at the top.
+- Optional `ptn_slide_heading` at the top.
 - One `st_grid` with auto-fit columns:
   `cols="repeat(auto-fit, minmax(<W>, 1fr))"` where `<W>` is the minimum
   card width (typically `280px` to `360px`).
@@ -42,7 +42,7 @@ deserves a small visual container.
 | Cell (default) | container | `s.project.containers.cell_primary_bg + cell_pad_md + s.center_txt` |
 | Cell (accent) | container | `s.project.containers.cell_accent_bg + cell_pad_md + s.center_txt` |
 | Cell (active) | container | `s.project.containers.cell_active_bg + cell_pad_md + s.center_txt` |
-| Card title | inline style | `bs.keyword` (uses `inline_emphasis`) |
+| Card title | inline style | `bs.keyword` (uses `ptn_inline_emphasis`) |
 | Card body | inline style | `bs.body` |
 | Grid | cols | `"repeat(auto-fit, minmax(280px, 1fr))"` |
 | Grid | gap | `"12px"` to `"24px"` |
@@ -53,7 +53,6 @@ deserves a small visual container.
 from streamtex import st_block, st_grid, st_write, st_space
 from streamtex.enums import Tags as t
 from custom.styles import Styles as s
-
 
 class BlockStyles:
     heading = s.project.titles.slide_title + s.center_txt
@@ -68,14 +67,12 @@ _cell = (
     + s.center_txt
 )
 
-
 CARDS = [
     ("AgileGen", "Gherkin + memory pool"),
     ("SE 3.0", "intent-centric"),
     ("MAISTRO", "7-phase agile"),
     # ... more cards
 ]
-
 
 def build():
     with st_block(s.project.containers.page_fill_top):
@@ -102,7 +99,7 @@ def build():
 ### INVARIANTS (never change)
 
 - All cards share the same cell style within one grid (visual symmetry).
-- Each card has a short keyword title (bolded with `inline_emphasis`)
+- Each card has a short keyword title (bolded with `ptn_inline_emphasis`)
   followed by an optional body fragment.
 - Cards reflow responsively via `repeat(auto-fit, minmax(...))` — never
   hard-code the column count.
@@ -112,7 +109,7 @@ def build():
 ### PARAMS (adjustable)
 
 - Number of cards: 2 to 12 (above 12, paginate or split into a
-  `categorized_grid`).
+  `ptn_categorized_grid`).
 - Cell tint: `primary` (neutral), `accent` (emphasized group), `active`
   (current/featured) — pick **one** per grid.
 - Minimum card width (`280px`–`360px`) depending on body length.
@@ -123,7 +120,7 @@ def build():
 ### INTERDITS (forbidden)
 
 - Do not mix two different cell tints within a single grid — to switch,
-  use `categorized_grid` (multiple grids, each with its own tint).
+  use `ptn_categorized_grid` (multiple grids, each with its own tint).
 - Do not embed images inside cards — illustrations belong outside the
   grid.
 - Do not give cards drastically different heights by stuffing one with
@@ -132,26 +129,28 @@ def build():
 ## When to use
 
 - Taxonomies of frameworks, principles, risks, tools.
-- Inventory slides ("here are the 6 NFRs", "5 vibecoding dangers").
+- Inventory slides ("here are the 6 NFRs", "5 known dangers").
 - Workshop instruction lists where each step is short.
 
 ## When NOT to use
 
-- Comparable items across attributes → `comparison_table`.
-- Cards with named categories → `categorized_grid`.
-- Long-form descriptions → `callout` or body paragraphs.
+- Comparable items across attributes → `ptn_comparison_table`.
+- Cards with named categories → `ptn_categorized_grid`.
+- Long-form descriptions → `ptn_callout` or body paragraphs.
 
 ## Examples
 
-- `modules/ai4se6d_gensem/blocks/bck_gensem_risks.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_sdlc_15tasks.py` (multiple
-  grids with different tints — overlaps with `categorized_grid`)
-- `modules/ai4se6d_gensem/blocks/bck_gensem_frameworks.py` slide 2
-  ("What's Missing Everywhere" 4-card grid)
+Live demo and gallery blocks (in the `stx_manual_patterns` documentation
+manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_lists.py` — `card_grid` shown next to its
+  cousins (`comparison_table`, `takeaways`).
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `categorized_grid` — when cards are organised in named groups
-- `comparison_table` — when items differ across attributes rather than
+- `ptn_categorized_grid` — when cards are organised in named groups
+- `ptn_comparison_table` — when items differ across attributes rather than
   being independent
-- `inline_emphasis` — used inside each card's title
+- `ptn_inline_emphasis` — used inside each card's title

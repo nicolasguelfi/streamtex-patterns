@@ -4,10 +4,10 @@ description = "StreamTeX-docs-style manuals: code + explanation + live demo (ext
 
 [patterns]
 include = [
-  "docs/manual_section.md",
-  "docs/feature_walkthrough.md",
-  "docs/api_reference_card.md",
-  "docs/composite_block.md",
+  "docs/ptn_manual_section.md",
+  "docs/ptn_feature_walkthrough.md",
+  "docs/ptn_api_reference_card.md",
+  "docs/ptn_composite_block.md",
 ]
 exclude = []
 

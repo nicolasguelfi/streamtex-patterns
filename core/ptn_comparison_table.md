@@ -1,5 +1,5 @@
 ---
-name: comparison_table
+name: ptn_comparison_table
 type: pattern
 description: Multi-column comparison table with header row and aligned rows
 tags: [grid, table, comparison]
@@ -29,7 +29,7 @@ afternoon, Tool vs Autonomy vs Best for, etc.). Each row may be marked
 ## Structure
 
 - Outer container: `st_block(<page_fill>)`.
-- Optional `slide_heading` at the top.
+- Optional `ptn_slide_heading` at the top.
 - One `st_grid` per row of the table (no nested header — each row is its
   own grid, but they share `cols=` so columns line up visually).
 - Header row: cells styled with `s.project.containers.table_header_cell`
@@ -59,7 +59,6 @@ from streamtex import st_block, st_grid, st_write, st_space
 from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 
-
 class BlockStyles:
     heading = s.project.titles.slide_title + s.center_txt
     table_hdr = s.project.titles.table_header
@@ -72,7 +71,6 @@ _hdr_cell = s.project.containers.table_header_cell
 _normal_cell = s.project.containers.table_normal_cell
 _active_cell = s.project.containers.table_active_cell
 
-
 def _row(cells, cell_style=_normal_cell, label_style=None):
     """Render one row. cells = list of strings. label_style applied to first cell if set."""
     n = len(cells)
@@ -81,7 +79,6 @@ def _row(cells, cell_style=_normal_cell, label_style=None):
         for i, txt in enumerate(cells):
             with g.cell():
                 st_write((label_style or bs.table_txt) if i == 0 else bs.table_txt, txt)
-
 
 def build():
     with st_block(s.project.containers.page_fill_top):
@@ -114,8 +111,8 @@ def build():
   text style).
 - Active rows are marked with the `cell_active_bg` palette — never with
   inline color overrides.
-- Each cell is single-line / short — long prose belongs in a `card_grid`
-  or `callout`, not a comparison table.
+- Each cell is single-line / short — long prose belongs in a `ptn_card_grid`
+  or `ptn_callout`, not a comparison table.
 - The first column is the row label (uses `table_label` style or the
   active variant).
 
@@ -137,37 +134,35 @@ def build():
 - Do not embed images or AI illustrations in cells — they break vertical
   rhythm.
 - Do not vary cell padding row-by-row — keep `cell_pad_sm` consistent.
-- Do not use this pattern for nested taxonomies — use `categorized_grid`
+- Do not use this pattern for nested taxonomies — use `ptn_categorized_grid`
   instead.
 
 ## When to use
 
 - Course / day / session schedule overviews.
 - Tool comparisons (Cursor vs Copilot vs Claude Code).
-- Spectrum / paradigm tables (waterfall vs agile vs vibecoding).
+- Spectrum / paradigm tables (e.g. waterfall vs agile vs ad-hoc).
 - Any "X across N attributes" comparison where each cell is short.
 
 ## When NOT to use
 
-- Single-stat emphasis → `stat_hero`.
-- Card-style enumerations of independent items → `card_grid`.
-- Nested categories → `categorized_grid`.
+- Single-stat emphasis → `ptn_stat_hero`.
+- Card-style enumerations of independent items → `ptn_card_grid`.
+- Nested categories → `ptn_categorized_grid`.
 
 ## Examples
 
-- `modules/ai4se6d_genai_intro/blocks/bck_intro_roadmap.py` (3-section
-  schedule with active "today")
-- `modules/ai4se6d_genai_intro/blocks/bck_intro_objective.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_sdlc_spectrum.py`
-- `modules/ai4se6d_vibecoding/blocks/bck_ide_comparison.py` (4-column tool
-  comparison)
-- `modules/ai4se6d_vibecoding/blocks/bck_vibeeng_spectrum.py`
+Live demo and gallery blocks (in the `stx_manual_patterns` documentation
+manual):
 
-9 blocks annotated `# @pattern: table-roadmap` in the corpus.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_lists.py` — `comparison_table` with header
+  row + 3 data rows.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `slide_heading` — typically used as the title row above the table
-- `card_grid` — alternative when items are independent rather than
+- `ptn_slide_heading` — typically used as the title row above the table
+- `ptn_card_grid` — alternative when items are independent rather than
   comparable across columns
-- `categorized_grid` — alternative when rows belong to named categories
+- `ptn_categorized_grid` — alternative when rows belong to named categories

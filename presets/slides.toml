@@ -4,11 +4,11 @@ description = "Slide-based courses, presentations, lecture decks (extends core)"
 
 [patterns]
 include = [
-  "slides/title_slide.md",
-  "slides/stat_hero.md",
-  "slides/evidence_insight.md",
-  "slides/exercise_flow.md",
-  "slides/categorized_grid.md",
+  "slides/ptn_title_slide.md",
+  "slides/ptn_stat_hero.md",
+  "slides/ptn_evidence_insight.md",
+  "slides/ptn_exercise_flow.md",
+  "slides/ptn_categorized_grid.md",
 ]
 exclude = []
 

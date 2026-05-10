@@ -1,5 +1,5 @@
 ---
-name: takeaways
+name: ptn_takeaways
 type: pattern
 description: Numbered list of 3–5 key takeaways with bold lead and explanation
 tags: [list, summary, conclusion]
@@ -32,13 +32,13 @@ chapter, or a workshop's debrief. The numbering is part of the rhetoric
 ## Structure
 
 - Outer container: `st_block(<page_fill>)` and centered inner block.
-- Optional `slide_heading` at the top.
+- Optional `ptn_slide_heading` at the top.
 - A wrapping `st_zoom(110)` (slightly enlarged for readability).
 - One `st_list(li_style=bs.body)` containing 3–5 `l.item()` entries.
 - Each item: a single `st_write(bs.body, (bs.label, "<N>. <lead>"), (bs.body, " — <explanation>"))`.
 - Optional closing `st_write(bs.highlight, "<conclusion sentence>")`
   after a final spacer.
-- May be followed by a `cite` if the takeaways summarize evidence.
+- May be followed by a `ptn_cite` if the takeaways summarize evidence.
 
 ## Styling rules
 
@@ -56,7 +56,6 @@ from streamtex import st_block, st_zoom, st_list, st_write, st_space
 from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 
-
 class BlockStyles:
     body = Style.create(s.Large + s.text.wrap.hyphens, "tk_body")
     label = Style.create(s.Large + s.bold + s.project.colors.primary, "tk_lbl")
@@ -64,7 +63,6 @@ class BlockStyles:
         s.Large + s.bold + s.project.colors.highlight + s.center_txt, "tk_hl",
     )
 bs = BlockStyles
-
 
 TAKEAWAYS = [
     ("Gains are real but variable",
@@ -76,11 +74,10 @@ TAKEAWAYS = [
 ]
 PUNCH = "This is why we need GSE-One."
 
-
 def build():
     with st_block(s.project.containers.page_fill_top):
         with st_block(s.center_txt):
-            # Optional slide_heading here
+            # Optional ptn_slide_heading here
             st_space("v", 2)
 
             with st_zoom(110):
@@ -115,7 +112,7 @@ def build():
   audience won't remember).
 - Closing punch line: present or absent.
 - Lead-in length: short noun phrase (3–6 words). Avoid full sentences.
-- Slide may follow a `cite` after the punch line if it summarizes
+- Slide may follow a `ptn_cite` after the punch line if it summarizes
   evidence.
 
 ### INTERDITS (forbidden)
@@ -139,26 +136,26 @@ def build():
 ## When NOT to use
 
 - Independent items without an "important to remember" framing →
-  `card_grid`.
-- Hierarchical content (sections + subsections) → `categorized_grid` or
+  `ptn_card_grid`.
+- Hierarchical content (sections + subsections) → `ptn_categorized_grid` or
   separate slides.
 - Sequence of steps in a procedure → use `st_list` with non-numbered
   styling.
 
 ## Examples
 
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_synthesis.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_frameworks.py` (slide 5)
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_paradox.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_reality.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_sota_takeaway.py`
+Live demo and gallery blocks (in the `stx_manual_patterns` documentation
+manual):
 
-9 blocks use this pattern in the corpus.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_lists.py` — `takeaways` with numbered items
+  and `label` + `keyword` lead-ins.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `slide_heading` — typically the title row above the list
-- `inline_emphasis` — supplies the `label` (bold + primary) lead-in
-- `evidence_insight` — composite template that includes a `takeaways`
+- `ptn_slide_heading` — typically the title row above the list
+- `ptn_inline_emphasis` — supplies the `label` (bold + primary) lead-in
+- `ptn_evidence_insight` — composite template that includes a `ptn_takeaways`
   block
-- `cite` — often follows the punch line for source attribution
+- `ptn_cite` — often follows the punch line for source attribution

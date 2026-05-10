@@ -1,5 +1,5 @@
 ---
-name: manual_section
+name: ptn_manual_section
 type: pattern
 description: Documentation section — heading + sub + explanation + code snippet + live demo
 tags: [docs, manual, demo, code]
@@ -12,7 +12,7 @@ since: 2026-05-10
 The canonical "feature explanation" pattern in StreamTeX manuals: a
 section heading, a sub-heading naming the specific topic, a short
 written explanation, a code snippet (verbatim), and a live demonstration
-that renders that exact code. Used pervasively in `streamtex-docs/`
+that renders that exact code. Used pervasively across documentation manuals
 manuals (intro, advanced, ai, ce, deploy, developer).
 
 ## Visual
@@ -78,7 +78,6 @@ from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 from blocks.helpers import show_code, show_explanation, show_details
 
-
 class BlockStyles:
     heading = s.project.titles.section_title + s.center_txt
     sub = s.project.titles.section_subtitle
@@ -89,7 +88,6 @@ class BlockStyles:
         + s.container.layouts.vertical_center_layout
     )
 bs = BlockStyles
-
 
 def build():
     with st_block(s.center_txt):
@@ -158,7 +156,7 @@ with st_grid(cols=3, cell_styles=bs.cell) as g:
   the reader.
 - Do not duplicate `show_code` snippets for the same demo (DRY at the
   reader level — one snippet, one demo).
-- Do not use slide-presentation patterns (`stat_hero`, `evidence_insight`)
+- Do not use slide-presentation patterns (`ptn_stat_hero`, `ptn_evidence_insight`)
   in a manual section — they are visually too dramatic for a docs context.
 
 ## When to use
@@ -172,20 +170,26 @@ with st_grid(cols=3, cell_styles=bs.cell) as g:
 
 - Pure prose / narrative documentation → no helpers needed, regular
   `st_write` is enough.
-- Conceptual sections without code → use a `callout` or plain text.
-- One-shot API references with no demo → use `api_reference_card`.
+- Conceptual sections without code → use a `ptn_callout` or plain text.
+- One-shot API references with no demo → use `ptn_api_reference_card`.
 
 ## Examples
 
-- `streamtex-docs/manuals/stx_manual_intro/blocks/_atomic/bck_grid_basics.py`
-- `streamtex-docs/manuals/stx_manual_intro/blocks/bck_qs_first_block.py`
-- Most `bck_*.py` files in `stx_manual_intro/blocks/_atomic/`
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_docs.py` — `manual_section` showcased next to
+  its peers (`feature_walkthrough`, `api_reference_card`,
+  `composite_block`). The pattern is also applied by every
+  `bck_gallery_*.py` and `bck_demo_*.py` block in the manual itself —
+  the manual is the canonical, self-referential reference.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `feature_walkthrough` — when a topic spans many small steps (more
+- `ptn_feature_walkthrough` — when a topic spans many small steps (more
   narrative / numbered)
-- `api_reference_card` — when documenting a single function in detail
-- `composite_block` — when a block aggregates several atomic blocks via
+- `ptn_api_reference_card` — when documenting a single function in detail
+- `ptn_composite_block` — when a block aggregates several atomic blocks via
   `st_include`
-- `callout` — for "Note" / "Warning" boxes within a section
+- `ptn_callout` — for "Note" / "Warning" boxes within a section

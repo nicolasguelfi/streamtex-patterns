@@ -1,5 +1,5 @@
 ---
-name: callout
+name: ptn_callout
 type: pattern
 description: Highlighted box for emphasized content (info / warning / critical / success variants)
 tags: [callout, container, emphasis]
@@ -32,8 +32,7 @@ background tint and inline accent style.
 - Optional spacer (`st_space("v", 0.5)`).
 - Body: one or two `st_write(bs.body_c, ...)` lines.
 - The variant (info / warning / critical / success) is encoded by the
-  **inline label color**, not by a different container — the callout
-  background stays uniform per project.
+  **inline label color**, not by a different container — the callout backgrounds stays uniform per project.
 
 ## Styling rules
 
@@ -57,7 +56,6 @@ background tint and inline accent style.
 from streamtex import st_block, st_write, st_space
 from custom.styles import Styles as s
 
-
 class BlockStyles:
     body_c = Style.create(s.Large + s.center_txt + s.text.wrap.hyphens, "co_body_c")
     accent = Style.create(
@@ -68,9 +66,8 @@ class BlockStyles:
     )
 bs = BlockStyles
 
-
 def build():
-    # Single callout
+    # Single ptn_callout
     with st_block(s.project.containers.callout):
         st_write(bs.accent, "<Label>")
         st_space("v", 0.5)
@@ -107,9 +104,9 @@ def build():
 
 - Variant: info / warning / critical / success / key (chosen by label
   inline color).
-- Body length: 1 to 3 lines. Above 3, prefer a `card_grid` cell or
+- Body length: 1 to 3 lines. Above 3, prefer a `ptn_card_grid` cell or
   paragraph.
-- Multiple callouts can be laid out in a `card_grid` (each cell holds
+- Multiple callouts can be laid out in a `ptn_card_grid` (each cell holds
   one callout) — useful for "what's missing" / "key takeaways" slides.
 - The label may be omitted for purely visual emphasis (rare).
 
@@ -132,25 +129,24 @@ def build():
 
 ## When NOT to use
 
-- Slide titles → `slide_heading`.
+- Slide titles → `ptn_slide_heading`.
 - Long quotes (4+ lines) → use a styled body paragraph.
-- Hero statistics → `stat_hero` (callouts are not for big numbers).
-- Lists of takeaways → `takeaways`.
+- Hero statistics → `ptn_stat_hero` (callouts are not for big numbers).
+- Lists of takeaways → `ptn_takeaways`.
 
 ## Examples
 
-- `modules/ai4se6d_gensem/blocks/bck_gensem_method_why.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_synthesis.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_frameworks.py` (slide
-  "What's Missing Everywhere" — 4 callouts in a grid)
-- `modules/ai4se6d_gensem/blocks/bck_gensem_ce_philosophy.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_t6_engineering.py`
+Live demo and gallery blocks (in the `stx_manual_patterns` documentation
+manual):
 
-68 occurrences of `s.project.containers.callout` in the corpus.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_callouts.py` — every variant on one page
+  (info, warning, critical, success).
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `card_grid` — N callouts laid out in a responsive grid
-- `inline_emphasis` — supplies the variant accent colors
-- `takeaways` — alternative when you need a numbered list rather than
+- `ptn_card_grid` — N callouts laid out in a responsive grid
+- `ptn_inline_emphasis` — supplies the variant accent colors
+- `ptn_takeaways` — alternative when you need a numbered list rather than
   framed boxes

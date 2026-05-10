@@ -1,5 +1,5 @@
 ---
-name: title_slide
+name: ptn_title_slide
 type: pattern
 description: Title slide with hero image, course/section title, subtitle, and author
 tags: [template, title, slide]
@@ -66,9 +66,7 @@ from custom.styles import Styles as s
 from custom.config import IS_EDITABLE
 from custom.prompts import AI_PREFIX as _PREFIX, AI_SUFFIX_LANDSCAPE as _SUFFIX
 
-
 _page_fill = s.project.containers.page_fill_center
-
 
 class BlockStyles:
     title = Style.create(
@@ -84,12 +82,10 @@ class BlockStyles:
     )
 bs = BlockStyles
 
-
 HERO_PROMPT = (
     f"{_PREFIX} <Visual concept describing the hero image, in evocative terms>. "
     f"{_SUFFIX}"
 )
-
 
 def build():
     with st_block(_page_fill):
@@ -146,8 +142,8 @@ def build():
 - Do not omit the AI image — the title slide is image-dominant by
   design.
 - Do not use this pattern for content slides (sub-section titles inside
-  a chapter use a `slide_heading` instead).
-- Do not place a citation (`cite`) on a title slide.
+  a chapter use a `ptn_slide_heading` instead).
+- Do not place a citation (`ptn_cite`) on a title slide.
 - Do not skip `toc_lvl="1"` — the title slide must anchor the
   navigation.
 - Do not hardcode the title color — always go through
@@ -161,25 +157,23 @@ def build():
 
 ## When NOT to use
 
-- Sub-section dividers inside a chapter (use a smaller `slide_heading`
+- Sub-section dividers inside a chapter (use a smaller `ptn_slide_heading`
   with optional image).
-- Pure data slides (use `stat_hero` or `evidence_insight`).
-- Conclusion slides (use `takeaways` followed by a final
+- Pure data slides (use `ptn_stat_hero` or `ptn_evidence_insight`).
+- Conclusion slides (use `ptn_takeaways` followed by a final
   acknowledgements slide).
 
 ## Examples
 
-- `modules/ai4se6d_genai_intro/blocks/bck_intro_title.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_title.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_method_title.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_ce_title.py`
-- `modules/ai4se6d_vibecoding/blocks/bck_title.py`
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
 
-5 blocks declare a `HERO_PROMPT` constant. About 10 more `bck_*_title.py`
-blocks share the same structure without the AI image.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_title_slide.py` — full live demo with title,
+  subtitle and authors row, ready to be copy-adapted to a new project.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `slide_heading` — for sub-section titles inside a chapter
-- `stat_hero` (variant b) — for image + content content slides (not
+- `ptn_slide_heading` — for sub-section titles inside a chapter
+- `ptn_stat_hero` (variant b) — for image + content content slides (not
   title slides)

@@ -1,5 +1,5 @@
 ---
-name: feature_walkthrough
+name: ptn_feature_walkthrough
 type: pattern
 description: Multi-step feature presentation — numbered steps, each with explanation, code, and demo
 tags: [docs, manual, walkthrough, tutorial]
@@ -10,7 +10,7 @@ since: 2026-05-10
 # Feature Walkthrough
 
 A narrative, numbered tutorial that walks a reader through using a
-StreamTeX feature end-to-end. Differs from `manual_section` by being
+StreamTeX feature end-to-end. Differs from `ptn_manual_section` by being
 **sequential and goal-oriented**: each step builds on the previous one,
 and at the end the reader has accomplished a concrete task.
 
@@ -66,12 +66,10 @@ from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 from blocks.helpers import show_code, show_explanation
 
-
 class BlockStyles:
     heading = s.project.titles.section_title + s.center_txt
     sub = s.project.titles.section_subtitle
 bs = BlockStyles
-
 
 def build():
     st_space("v", 1)
@@ -133,7 +131,7 @@ def build():
 - The walkthrough has a clear **terminal goal** stated in the section
   heading — by the last step, the reader has achieved it.
 - `show_explanation` precedes `show_code` in every step (same as
-  `manual_section`).
+  `ptn_manual_section`).
 - Each step is **self-contained enough** that the reader can verify
   progress (file saved, command run, output seen).
 
@@ -152,7 +150,7 @@ def build():
 - Do not mix walkthroughs and reference content in the same block —
   separate them.
 - Do not use this pattern for purely descriptive content — use
-  `manual_section` instead.
+  `ptn_manual_section` instead.
 - Do not have a step that only contains code without explanation — the
   reader will skim and miss the point.
 
@@ -164,21 +162,24 @@ def build():
 
 ## When NOT to use
 
-- Pure feature documentation → `manual_section`.
+- Pure feature documentation → `ptn_manual_section`.
 - Single-action snippet ("how to use this one function") →
-  `api_reference_card`.
-- Conceptual / narrative documentation → plain text + `callout`.
+  `ptn_api_reference_card`.
+- Conceptual / narrative documentation → plain text + `ptn_callout`.
 
 ## Examples
 
-- `streamtex-docs/manuals/stx_manual_intro/blocks/bck_qs_first_block.py`
-- `streamtex-docs/manuals/stx_manual_intro/blocks/bck_qs_installation.py`
-- `streamtex-docs/manuals/stx_manual_intro/blocks/bck_qs_new_project.py`
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_docs.py` — `feature_walkthrough` with a
+  numbered 7-step demo.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `manual_section` — for feature descriptions without explicit step
+- `ptn_manual_section` — for feature descriptions without explicit step
   numbering
-- `composite_block` — when a tutorial is too long for one block file
+- `ptn_composite_block` — when a tutorial is too long for one block file
   and is decomposed into atomic blocks
-- `callout` — for "Note: ..." / "Tip: ..." asides within a step
+- `ptn_callout` — for "Note: ..." / "Tip: ..." asides within a step

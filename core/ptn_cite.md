@@ -1,5 +1,5 @@
 ---
-name: cite
+name: ptn_cite
 type: pattern
 description: Inline source citation with author, year, and optional URL — placed under a quote, stat, or claim
 tags: [citation, evidence, footer]
@@ -46,11 +46,9 @@ from streamtex import st_write, st_space
 from streamtex.bib import cite
 from custom.styles import Styles as s
 
-
 class BlockStyles:
     source = s.project.citation + s.large + s.center_txt
 bs = BlockStyles
-
 
 def build():
     # ... slide content above ...
@@ -61,7 +59,7 @@ def build():
 ## When to use
 
 - After a statistic, factual claim, or quotation that needs attribution.
-- At the bottom of a `stat_hero` or `evidence_insight` slide.
+- At the bottom of a `ptn_stat_hero` or `ptn_evidence_insight` slide.
 - After any block of body text that draws on external evidence.
 
 ## When NOT to use
@@ -74,14 +72,17 @@ def build():
 
 ## Examples
 
-- `modules/ai4se6d_vibecoding/blocks/bck_vibecoding_danger_metr.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_paradox_ai.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_synthesis.py`
+Live demo and gallery blocks (in the `stx_manual_patterns` documentation
+manual):
 
-55 files in the `ai4se6d` corpus import `from streamtex.bib import cite`.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_atoms.py` — `cite` rendered alongside the
+  other core atoms with multiple variants (single source, multi-source,
+  inline citation under a stat).
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `stat_hero` — almost always pairs with a `cite` at the bottom
-- `evidence_insight` — composes `stat_hero` + `cite` + `takeaways`
-- `callout` — citation may appear under an emphasised claim
+- `ptn_stat_hero` — almost always pairs with a `ptn_cite` at the bottom
+- `ptn_evidence_insight` — composes `ptn_stat_hero` + `ptn_cite` + `ptn_takeaways`
+- `ptn_callout` — citation may appear under an emphasised claim

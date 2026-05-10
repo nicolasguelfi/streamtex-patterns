@@ -4,13 +4,13 @@ description = "Universal patterns — atoms and molecules used in every project"
 
 [patterns]
 include = [
-  "core/slide_heading.md",
-  "core/cite.md",
-  "core/inline_emphasis.md",
-  "core/callout.md",
-  "core/card_grid.md",
-  "core/comparison_table.md",
-  "core/takeaways.md",
+  "core/ptn_slide_heading.md",
+  "core/ptn_cite.md",
+  "core/ptn_inline_emphasis.md",
+  "core/ptn_callout.md",
+  "core/ptn_card_grid.md",
+  "core/ptn_comparison_table.md",
+  "core/ptn_takeaways.md",
 ]
 exclude = []
 

@@ -1,5 +1,5 @@
 ---
-name: api_reference_card
+name: ptn_api_reference_card
 type: pattern
 description: Reference card for one StreamTeX API function — signature, params, return, example
 tags: [docs, api, reference]
@@ -71,7 +71,6 @@ from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 from blocks.helpers import show_code, show_explanation
 
-
 class BlockStyles:
     heading = s.project.titles.section_title + s.text.fonts.font_monospace + s.center_txt
     lead = s.project.titles.body + s.center_txt
@@ -81,14 +80,12 @@ class BlockStyles:
     body = s.project.titles.body
 bs = BlockStyles
 
-
 PARAMS = [
     ("cols", "int | str", "Column spec (3 = 3 equal cols; \"1fr 2fr\" = ratio)"),
     ("gap", "str | None", "CSS gap (e.g. \"12px\")"),
     ("cell_styles", "Style | None", "Style applied to every cell"),
 ]
 RELATED = ["st_block", "st_span", "st_list"]
-
 
 def build():
     with st_block(s.center_txt):
@@ -156,10 +153,10 @@ with st_grid(cols=3, gap="12px") as g:
 ### INTERDITS (forbidden)
 
 - Do not use this pattern for tutorials or walkthroughs — that's
-  `feature_walkthrough`'s role.
+  `ptn_feature_walkthrough`'s role.
 - Do not omit the function signature — it's the heading.
 - Do not mix multiple unrelated functions in the same card — split.
-- Do not use slide patterns (`stat_hero`, etc.) here — wrong context.
+- Do not use slide patterns (`ptn_stat_hero`, etc.) here — wrong context.
 
 ## When to use
 
@@ -170,14 +167,23 @@ with st_grid(cols=3, gap="12px") as g:
 
 ## When NOT to use
 
-- Tutorial-style content → `feature_walkthrough`.
-- Conceptual sections → `manual_section`.
-- Quick lists of all functions → use a `card_grid` or
-  `comparison_table`.
+- Tutorial-style content → `ptn_feature_walkthrough`.
+- Conceptual sections → `ptn_manual_section`.
+- Quick lists of all functions → use a `ptn_card_grid` or
+  `ptn_comparison_table`.
+
+## Examples
+
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_docs.py` — `api_reference_card` with a
+  monospace heading, signature line and parameters table.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `manual_section` — when the doc is broader than one function
-- `feature_walkthrough` — for goal-oriented tutorials using the function
-- `card_grid` — for cataloging many functions in a list view
-- `inline_emphasis` — used for parameter names and types
+- `ptn_manual_section` — when the doc is broader than one function
+- `ptn_feature_walkthrough` — for goal-oriented tutorials using the function
+- `ptn_card_grid` — for cataloging many functions in a list view
+- `ptn_inline_emphasis` — used for parameter names and types

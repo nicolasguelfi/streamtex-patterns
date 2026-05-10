@@ -1,5 +1,5 @@
 ---
-name: evidence_insight
+name: ptn_evidence_insight
 type: pattern
 description: Slide template combining a hero stat, a body explanation, key takeaways, and a source citation
 tags: [template, evidence, slide]
@@ -10,14 +10,14 @@ since: 2026-05-10
 # Evidence Insight
 
 A composite slide template used to drive home a single piece of evidence.
-It composes four other patterns in a fixed order: `slide_heading` →
-`stat_hero` (or short body) → `takeaways` → `cite`. Use it when you want
+It composes four other patterns in a fixed order: `ptn_slide_heading` →
+`ptn_stat_hero` (or short body) → `ptn_takeaways` → `ptn_cite`. Use it when you want
 the slide to read as "headline + finding + what to remember + source".
 
 ## Visual
 
 ```
-   <slide_heading: "Evidence Synthesis">                 ← 95/5 + tooltip
+   <ptn_slide_heading: "Evidence Synthesis">                 ← 95/5 + tooltip
 
                           7h
    Lost per team member weekly to AI inefficiencies.
@@ -28,19 +28,19 @@ the slide to read as "headline + finding + what to remember + source".
 
            This is why we need GSE-One.
 
-              ─── GitLab DevSecOps 2025 ───              ← cite
+              ─── GitLab DevSecOps 2025 ───              ← ptn_cite
 ```
 
 ## Structure
 
 This pattern composes four other patterns in this order:
 
-1. `slide_heading` — title row with optional tooltip.
-2. (Optional) hero stat — uses the `stat_hero` core (just the big number,
+1. `ptn_slide_heading` — title row with optional tooltip.
+2. (Optional) hero stat — uses the `ptn_stat_hero` core (just the big number,
    not the full hero variant).
 3. (Optional) one-paragraph body explanation in `bs.body`.
-4. `takeaways` — 3 numbered key insights with optional punch line.
-5. `cite` — source citation at the very bottom.
+4. `ptn_takeaways` — 3 numbered key insights with optional punch line.
+5. `ptn_cite` — source citation at the very bottom.
 
 ## Styling rules
 
@@ -50,7 +50,7 @@ template adds:
 - Vertical spacing of `st_space("v", 1)` to `st_space("v", 2)` between
   each section.
 - A wrapping `st_zoom(110)` on the takeaways list (inherited from
-  `takeaways`).
+  `ptn_takeaways`).
 
 ## Code skeleton
 
@@ -60,7 +60,6 @@ from streamtex.bib import cite
 from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 from shared_widgets import st_hover_tooltip
-
 
 class BlockStyles:
     heading = s.project.titles.slide_title + s.center_txt
@@ -73,11 +72,10 @@ class BlockStyles:
     source = s.project.citation + s.large + s.center_txt
 bs = BlockStyles
 
-
 def build():
     with st_block(s.project.containers.page_fill_top):
         with st_block(s.center_txt):
-            # 1. slide_heading (with tooltip)
+            # 1. ptn_slide_heading (with tooltip)
             with st_grid(
                 cols="95% 5%", gap="0px",
                 cell_styles=s.project.containers.grid_cell_centered,
@@ -102,7 +100,7 @@ def build():
             st_write(bs.body, "<Body explanation>")
             st_space("v", 2)
 
-            # 4. takeaways
+            # 4. ptn_takeaways
             with st_zoom(110):
                 with st_list(li_style=bs.body) as l:
                     for i, (lead, body) in enumerate(TAKEAWAYS, start=1):
@@ -116,7 +114,7 @@ def build():
             st_space("v", 2)
             st_write(bs.highlight, "<Punch line>")
 
-        # 5. cite
+        # 5. ptn_cite
         st_space("v", 1)
         st_write(bs.source, cite("<bib_key>"))
 ```
@@ -128,7 +126,7 @@ def build():
 - The composition order is fixed: heading → (stat / body) → takeaways →
   cite. The reader's eye must travel top-to-bottom in that order.
 - The slide presents **one piece of evidence**, not several.
-- The citation is mandatory — no evidence_insight without source
+- The citation is mandatory — no ptn_evidence_insight without source
   attribution.
 - The slide ends with the `highlight` punch line (1 line) tying the
   takeaways together — it sets up the transition to the next concept.
@@ -138,22 +136,22 @@ def build():
 - Hero stat: present (centered, single number/short phrase) or absent
   (in which case the body paragraph carries the headline).
 - Body paragraph: present or absent.
-- Number of takeaways: 3 to 5 (inherits from `takeaways` pattern).
+- Number of takeaways: 3 to 5 (inherits from `ptn_takeaways` pattern).
 - Tooltip on the heading: present or absent.
-- The composition may swap the order of `stat_hero` and the body
+- The composition may swap the order of `ptn_stat_hero` and the body
   paragraph (stat-first vs paragraph-first), but never break out of
   this five-section spine.
 
 ### INTERDITS (forbidden)
 
-- Do not split the evidence across two columns — `evidence_insight` is
+- Do not split the evidence across two columns — `ptn_evidence_insight` is
   a single-column slide.
 - Do not include images (other than the hero stat as text).
 - Do not omit the source — for "no source available" content, use a
   different pattern.
 - Do not use this template when the goal is comparing several pieces
-  of evidence — use a `comparison_table` or break into separate
-  `evidence_insight` slides instead.
+  of evidence — use a `ptn_comparison_table` or break into separate
+  `ptn_evidence_insight` slides instead.
 
 ## When to use
 
@@ -164,26 +162,26 @@ def build():
 
 ## When NOT to use
 
-- Single-stat slides without takeaways → `stat_hero` (just the
+- Single-stat slides without takeaways → `ptn_stat_hero` (just the
   centerpiece).
-- Multi-source comparisons → `comparison_table`.
-- Pure-takeaways slides without supporting evidence → `takeaways`
+- Multi-source comparisons → `ptn_comparison_table`.
+- Pure-takeaways slides without supporting evidence → `ptn_takeaways`
   alone.
 
 ## Examples
 
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_synthesis.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_rcts.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_reality.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_enterprise.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_sdlc_paradigms.py`
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
 
-5 blocks annotated `# @pattern: evidence-insight` in the corpus.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_evidence_insight.py` — composition of
+  `stat_hero` + `cite` + `takeaways`, the canonical evidence-driven
+  slide structure.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `slide_heading` (composed)
-- `stat_hero` (composed, optional)
-- `takeaways` (composed)
-- `cite` (composed)
-- `inline_emphasis` (used inside the body and takeaways)
+- `ptn_slide_heading` (composed)
+- `ptn_stat_hero` (composed, optional)
+- `ptn_takeaways` (composed)
+- `ptn_cite` (composed)
+- `ptn_inline_emphasis` (used inside the body and takeaways)

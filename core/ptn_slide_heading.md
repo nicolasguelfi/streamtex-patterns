@@ -1,5 +1,5 @@
 ---
-name: slide_heading
+name: ptn_slide_heading
 type: pattern
 description: Two-cell heading row (title + tooltip icon) at the top of a slide
 tags: [atom, heading, layout]
@@ -10,8 +10,8 @@ since: 2026-05-10
 # Slide Heading
 
 The standard heading row used at the top of nearly every content slide in
-the `ai4se6d` collection. A 2-column grid with the slide title on the left
-(95%) and a small tooltip-icon hover area on the right (5%).
+StreamTeX presentation projects. A 2-column grid with the slide title on
+the left (95%) and a small tooltip-icon hover area on the right (5%).
 
 ## Visual
 
@@ -55,11 +55,9 @@ from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 from shared_widgets import st_hover_tooltip
 
-
 class BlockStyles:
     heading = s.project.titles.slide_title + s.center_txt
 bs = BlockStyles
-
 
 def build():
     with st_grid(
@@ -128,22 +126,25 @@ def build():
 
 ## When NOT to use
 
-- True title slides (use `title_slide` instead).
+- True title slides (use `ptn_title_slide` instead).
 - Slide breaks / dividers (no title, no tooltip).
 - Slides where the title needs to span over an image and a tooltip would
   be redundant — use a plain `st_write(bs.heading, ...)` instead.
 
 ## Examples
 
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_synthesis.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_practice_p1.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_frameworks.py` (multiple instances)
-- `modules/ai4se6d_vibecoding/blocks/bck_vibecoding_reality.py`
+Live demo and gallery blocks (in the `stx_manual_patterns` documentation
+manual):
 
-54 occurrences in the `ai4se6d` corpus.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_slide_heading.py` — full live demo with three
+  variants (default, with subtitle, narrow accent column).
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_atoms.py` — `slide_heading` showcased side by
+  side with the other core atoms (`cite`, `inline_emphasis`).
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `title_slide` — for true cover/title slides
-- `cite` — often paired at the bottom of the same slide to attribute
+- `ptn_title_slide` — for true cover/title slides
+- `ptn_cite` — often paired at the bottom of the same slide to attribute
   sources for the content shown

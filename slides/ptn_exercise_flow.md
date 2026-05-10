@@ -1,5 +1,5 @@
 ---
-name: exercise_flow
+name: ptn_exercise_flow
 type: pattern
 description: Slide template for a timed exercise — briefing, action, debrief
 tags: [template, exercise, practice, slide]
@@ -24,8 +24,8 @@ Used for the `practice_pN` series in the GenSEM module (8 exercises).
 ```
    Slide 1 (Briefing)
    ────────────────────
-   [slide_heading + tooltip]
-   [logo / image]    [card_grid: 1. Install ... 2. Open ... 3. Run ...]
+   [ptn_slide_heading + tooltip]
+   [logo / image]    [ptn_card_grid: 1. Install ... 2. Open ... 3. Run ...]
    [accent: "Time: 30 minutes"]
 
    Slide 2 (Action)
@@ -35,9 +35,9 @@ Used for the `practice_pN` series in the GenSEM module (8 exercises).
 
    Slide 3 (Debrief)
    ────────────────────
-   [slide_heading: "Debrief — Practice 1"]
-   [callout: "What did you notice?"]
-   [card_grid: 3-5 typical observations]
+   [ptn_slide_heading: "Debrief — Practice 1"]
+   [ptn_callout: "What did you notice?"]
+   [ptn_card_grid: 3-5 typical observations]
 ```
 
 ## Structure
@@ -48,7 +48,7 @@ calls three other patterns separated by `st_slide_break`:
 ```python
 st_slide_break(marker_label="<Exercise N>: <name>")
 # --- Briefing slide ---
-#   slide_heading + (image | logo) + card_grid (1. ... 2. ... 3. ...)
+#   ptn_slide_heading + (image | logo) + ptn_card_grid (1. ... 2. ... 3. ...)
 #   + accent paragraph "Time: <N> minutes"
 
 st_slide_break(marker_label="<Exercise N>: Action")
@@ -58,8 +58,8 @@ st_slide_break(marker_label="<Exercise N>: Action")
 
 st_slide_break(marker_label="<Exercise N>: Debrief")
 # --- Debrief slide ---
-#   slide_heading + callout (question) + card_grid (observations)
-#   + (optional) takeaways / cite
+#   ptn_slide_heading + ptn_callout (question) + ptn_card_grid (observations)
+#   + (optional) ptn_takeaways / ptn_cite
 ```
 
 ## Styling rules
@@ -85,7 +85,6 @@ from streamtex.enums import Tags as t, ListTypes as lt
 from custom.styles import Styles as s
 from shared_widgets import st_hover_tooltip
 
-
 class BlockStyles:
     heading = s.project.titles.slide_title + s.center_txt
     body = Style.create(s.Large + s.center_txt + s.text.wrap.hyphens, "ex_body")
@@ -108,13 +107,12 @@ _cell = (
     + s.project.containers.cell_pad_md + s.center_txt
 )
 
-
 def build():
     # === Slide 1: Briefing ===========================================
     st_slide_break(marker_label="Practice N: <name>")
     with st_block(s.project.containers.page_fill_top):
         with st_block(s.center_txt):
-            # slide_heading (with tooltip)
+            # ptn_slide_heading (with tooltip)
             with st_grid(
                 cols="95% 5%", gap="0px",
                 cell_styles=s.project.containers.grid_cell_centered,
@@ -165,7 +163,7 @@ def build():
             with st_block(s.project.containers.callout):
                 st_write(bs.accent, "What did you notice?")
             st_space("v", 1)
-            # card_grid of typical observations ...
+            # ptn_card_grid of typical observations ...
 ```
 
 ## Extrapolation rules
@@ -185,7 +183,7 @@ def build():
 
 ### PARAMS (adjustable)
 
-- Number of briefing instructions: 2 to 6 (use `card_grid` or a
+- Number of briefing instructions: 2 to 6 (use `ptn_card_grid` or a
   `st_list` for them).
 - Image / logo on briefing: present or absent.
 - Tooltip on each slide heading: present or absent.
@@ -217,16 +215,17 @@ def build():
 
 ## Examples
 
-- `modules/ai4se6d_gensem/blocks/bck_gensem_practice_p1.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_practice_p2.py`
-- ... through `bck_gensem_practice_p8.py`
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
 
-8 blocks annotated `# @pattern: exercise-flow` in the corpus.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_exercise_flow.py` — full live demo with the 4
+  canonical sections (Goal, Steps, Hints, Outcome).
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `slide_heading` (composed in briefing and debrief)
-- `card_grid` (composed for instructions / observations)
-- `callout` (composed for the debrief question)
-- `inline_emphasis` (used in the briefing list)
-- `takeaways` (optional final slide if the debrief leads to a synthesis)
+- `ptn_slide_heading` (composed in briefing and debrief)
+- `ptn_card_grid` (composed for instructions / observations)
+- `ptn_callout` (composed for the debrief question)
+- `ptn_inline_emphasis` (used in the briefing list)
+- `ptn_takeaways` (optional final slide if the debrief leads to a synthesis)

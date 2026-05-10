@@ -4,9 +4,9 @@ description = "Just the 3 atoms — for projects that only need basic emphasis p
 
 [patterns]
 include = [
-  "core/slide_heading.md",
-  "core/cite.md",
-  "core/inline_emphasis.md",
+  "core/ptn_slide_heading.md",
+  "core/ptn_cite.md",
+  "core/ptn_inline_emphasis.md",
 ]
 exclude = []
 

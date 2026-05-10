@@ -1,5 +1,5 @@
 ---
-name: inline_emphasis
+name: ptn_inline_emphasis
 type: pattern
 description: Inline keyword/label/accent variants for mixed-style text inside a single st_write
 tags: [inline, text, emphasis]
@@ -53,7 +53,6 @@ highlight = s.bold + s.project.colors.highlight
 from streamtex import st_write
 from custom.styles import Styles as s
 
-
 class BlockStyles:
     body = s.project.titles.body
     keyword = s.bold + s.project.colors.primary
@@ -61,7 +60,6 @@ class BlockStyles:
     highlight = s.bold + s.project.colors.highlight
     label = s.bold + s.project.colors.primary + s.center_txt
 bs = BlockStyles
-
 
 def build():
     # Single st_write with mixed-style fragments
@@ -118,25 +116,28 @@ def build():
 - Any sentence where 1–3 fragments need stronger emphasis than the
   surrounding text (statistics, identifiers, paradoxical phrases).
 - List item leads (`1. <keyword>Install</keyword> ...`).
-- Body explanation under a `stat_hero`.
+- Body explanation under a `ptn_stat_hero`.
 
 ## When NOT to use
 
 - For long blocks of bold text — promote them to a separate
   `st_write(bs.bold_style, ...)` instead.
 - For decorative emphasis with no semantic role — keep usage meaningful.
-- For headings — use `slide_heading` styles, not inline emphasis.
+- For headings — use `ptn_slide_heading` styles, not inline emphasis.
 
 ## Examples
 
-- `modules/ai4se6d_vibecoding/blocks/bck_vibecoding_danger_metr.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_evidence_synthesis.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_practice_p1.py`
+Live demo and gallery blocks (in the `stx_manual_patterns` documentation
+manual):
 
-Used in roughly 150 blocks across the `ai4se6d` corpus.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_atoms.py` — `inline_emphasis` showcased with
+  every variant (`label`, `keyword`, `accent`, `highlight`, `critical`,
+  `success`).
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `takeaways` — heavy user of `label` + `keyword` lead-ins
-- `callout` — accent / highlight variants pair with critical / warning
+- `ptn_takeaways` — heavy user of `label` + `keyword` lead-ins
+- `ptn_callout` — accent / highlight variants pair with critical / warning
   callouts

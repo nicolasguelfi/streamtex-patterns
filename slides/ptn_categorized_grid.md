@@ -1,5 +1,5 @@
 ---
-name: categorized_grid
+name: ptn_categorized_grid
 type: pattern
 description: Grid of cards organised in named categories with category headers
 tags: [grid, cards, categories, taxonomy]
@@ -9,7 +9,7 @@ since: 2026-05-10
 
 # Categorized Grid
 
-A vertical sequence of `card_grid` instances, each preceded by a
+A vertical sequence of `ptn_card_grid` instances, each preceded by a
 **category header**, where each category uses a different cell tint
 (`primary` / `accent` / `active`). Used for taxonomies that have named
 groups: "Adaptations / AI-Native / Process Plugins", "NEW / ELEVATED /
@@ -40,7 +40,7 @@ The pattern is a sequence of category sections. Each section is:
 
 1. A category header — `st_write(bs.cat_label, "<Category — subtitle>")`
 2. A small spacer — `st_space("v", 0.5)`.
-3. A `card_grid` instance with the category's tint applied to all
+3. A `ptn_card_grid` instance with the category's tint applied to all
    cells.
 4. A vertical spacer between categories — `st_space("v", 1)`.
 
@@ -71,7 +71,6 @@ from streamtex import st_block, st_grid, st_write, st_space
 from streamtex.enums import Tags as t
 from custom.styles import Styles as s
 
-
 class BlockStyles:
     heading = s.project.titles.slide_title + s.center_txt
     body = Style.create(s.Large + s.text.wrap.hyphens, "ct_body")
@@ -98,7 +97,6 @@ _cat_active = (
     + s.project.containers.cell_pad_md + s.center_txt
 )
 
-
 CATEGORIES = [
     ("Adaptations — Existing methods extended", _cat_primary, [
         ("AgileGen", "Gherkin + memory pool"),
@@ -114,7 +112,6 @@ CATEGORIES = [
         ("Compound Engineering → GSE-One", ""),
     ]),
 ]
-
 
 def build():
     with st_block(s.project.containers.page_fill_top):
@@ -154,7 +151,7 @@ def build():
 - All cards within a single category share the same cell tint.
 - Different categories use different tints — that's how the eye
   identifies the grouping.
-- The `card_grid` cell semantics from the underlying pattern are
+- The `ptn_card_grid` cell semantics from the underlying pattern are
   preserved (responsive `auto-fit`, `minmax(280px, 1fr)`).
 - Categories are stacked vertically, never side-by-side.
 
@@ -162,7 +159,7 @@ def build():
 
 - Number of categories: 2 to 4. Above 4, the eye loses the grouping —
   split into two slides.
-- Number of cards per category: 1 to 8 (each `card_grid` instance
+- Number of cards per category: 1 to 8 (each `ptn_card_grid` instance
   follows its own params).
 - Tint assignment: `primary → accent → active` (default progression),
   or `primary → accent` for binary groupings, or other mappings as
@@ -180,7 +177,7 @@ def build():
   whole point of the pattern.
 - Do not nest sub-categories inside a category — promote them to a
   separate slide.
-- Do not mix `card_grid` and `comparison_table` rows in the same
+- Do not mix `ptn_card_grid` and `ptn_comparison_table` rows in the same
   pattern instance.
 
 ## When to use
@@ -192,22 +189,23 @@ def build():
 
 ## When NOT to use
 
-- Flat enumerations without categories → `card_grid`.
-- Comparison across attributes → `comparison_table`.
-- Single-stat focal slide → `stat_hero`.
+- Flat enumerations without categories → `ptn_card_grid`.
+- Comparison across attributes → `ptn_comparison_table`.
+- Single-stat focal slide → `ptn_stat_hero`.
 
 ## Examples
 
-- `modules/ai4se6d_gensem/blocks/bck_gensem_frameworks.py` (slide 1:
-  Adaptations / AI-Native / Process Plugins)
-- `modules/ai4se6d_gensem/blocks/bck_gensem_fw_landscape.py`
-- `modules/ai4se6d_gensem/blocks/bck_gensem_sdlc_15tasks.py`
-  (NEW / ELEVATED / TRANSFORMED tasks)
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_categorized_grid.py` — three named categories,
+  each with its own tint and an inner grid of cards.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `card_grid` — used as the building block within each category
-- `slide_heading` — typically used as the title row above the grid
-- `inline_emphasis` — used inside each card title
-- `comparison_table` — alternative when items are comparable across
+- `ptn_card_grid` — used as the building block within each category
+- `ptn_slide_heading` — typically used as the title row above the grid
+- `ptn_inline_emphasis` — used inside each card title
+- `ptn_comparison_table` — alternative when items are comparable across
   attributes rather than grouped

@@ -1,5 +1,5 @@
 ---
-name: composite_block
+name: ptn_composite_block
 type: pattern
 description: Composite block aggregating several atomic sub-blocks via st_include
 tags: [docs, manual, composition, atomic]
@@ -53,18 +53,15 @@ TOC. Atomic sub-blocks live in a sibling `_atomic/` folder.
 import streamtex as stx
 from streamtex import st_include
 
-
 bck_part_a = stx.load_atomic_block("bck_part_a", __file__)
 bck_part_b = stx.load_atomic_block("bck_part_b", __file__)
 bck_part_c = stx.load_atomic_block("bck_part_c", __file__)
-
 
 class BlockStyles:
     """Composite block — no styles of its own."""
     pass
 
 bs = BlockStyles
-
 
 def build():
     """Include atomic blocks for this section."""
@@ -74,7 +71,7 @@ def build():
 ```
 
 The atomic blocks (`_atomic/bck_part_a.py`, etc.) follow the
-`manual_section` pattern individually.
+`ptn_manual_section` pattern individually.
 
 ## Extrapolation rules
 
@@ -96,8 +93,8 @@ The atomic blocks (`_atomic/bck_part_a.py`, etc.) follow the
 - Number of atomic sub-blocks: 2 to ~6.
 - Order of `st_include` calls determines render order in the TOC and
   in the final document.
-- Atomic blocks may use any pattern (`manual_section`,
-  `feature_walkthrough`, `api_reference_card`).
+- Atomic blocks may use any pattern (`ptn_manual_section`,
+  `ptn_feature_walkthrough`, `ptn_api_reference_card`).
 - The composite's filename signals the topic (`bck_grids_and_lists.py`
   → atomic blocks are about grids and lists).
 
@@ -115,27 +112,30 @@ The atomic blocks (`_atomic/bck_part_a.py`, etc.) follow the
 ## When to use
 
 - A topic that naturally splits into 3-6 sub-blocks of comparable size
-  (each with its own `manual_section`).
+  (each with its own `ptn_manual_section`).
 - When a single block file would exceed ~200 lines and become unwieldy.
 - When sub-blocks need to be reused across multiple composites.
 
 ## When NOT to use
 
-- Topic fits in one block under ~200 lines → use `manual_section`
+- Topic fits in one block under ~200 lines → use `ptn_manual_section`
   directly.
 - Composite of 1 atomic block → meaningless wrapper, just inline.
 - Procedural walkthroughs that depend on each other → use
-  `feature_walkthrough` in a single block.
+  `ptn_feature_walkthrough` in a single block.
 
 ## Examples
 
-- `streamtex-docs/manuals/stx_manual_intro/blocks/bck_grids_and_lists.py`
-  composes `_atomic/bck_grid_basics.py`,
-  `_atomic/bck_grid_cell_styles.py`, `_atomic/bck_lists.py`.
-- `streamtex-docs/manuals/stx_manual_intro/blocks/bck_containers_and_layout.py`
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_docs.py` — `composite_block` example
+  composing `manual_section` + `feature_walkthrough` +
+  `api_reference_card`.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
 ## Related patterns
 
-- `manual_section` — used inside each atomic block
-- `feature_walkthrough` — alternative when the topic is sequential
+- `ptn_manual_section` — used inside each atomic block
+- `ptn_feature_walkthrough` — alternative when the topic is sequential
   rather than parallel sub-topics
