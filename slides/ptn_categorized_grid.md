@@ -169,6 +169,28 @@ def build():
 - Final category may be highlighted with a single full-width "winner"
   card (see Process Plugins example).
 
+- Category headers are phase labels (`"Day 1 — <theme>"`, `"Phase 2 —
+  <theme>"`). The dash-separated subtitle becomes mandatory because it
+  carries the phase's content.
+- Inside each phase, the inner grid is **two columns** (typically
+  `cols="1fr 1fr"` for Morning / Afternoon, or `cols="repeat(N, 1fr)"`
+  for finer sub-divisions) — never `auto-fit`, because the temporal
+  alignment depends on a fixed number of columns.
+- The "current" phase uses the `active` tint to indicate "you are
+  here"; past phases use `primary`; future phases use `accent` or a
+  muted variant.
+- All other INVARIANTS still apply: each phase has its header, all
+  cards in a phase share the same tint, phases are stacked vertically.
+
+Currently applied in ai4se6d as:
+- `modules/ai4se6d_genai_intro/blocks/bck_intro_roadmap.py` (3-day
+  schedule with the "current" day highlighted)
+- `modules/ai4se6d_gensem/blocks/bck_gensem_roadmap.py`
+- `modules/ai4se6d_gensem/blocks/bck_gensem_fw_agilegen_roadmap.py`
+
+Do not use this variant for non-temporal groupings — the temporal
+alignment guarantee only matters when phases follow each other in time.
+
 ### INTERDITS (forbidden)
 
 - Do not reuse the same tint across two categories — the visual
@@ -192,6 +214,36 @@ def build():
 - Flat enumerations without categories → `ptn_card_grid`.
 - Comparison across attributes → `ptn_comparison_table`.
 - Single-stat focal slide → `ptn_stat_hero`.
+
+## Variants
+
+### Sequence / timeline variant
+
+When the categories represent **temporal phases** rather than
+qualitative groupings (Day 1 / Day 2 / Day 3, Phase 1 / Phase 2 / …,
+Step 1 / Step 2 / …), the pattern adapts as follows:
+
+- Category headers are phase labels (`"Day 1 — <theme>"`, `"Phase 2 —
+  <theme>"`). The dash-separated subtitle becomes mandatory because it
+  carries the phase's content.
+- Inside each phase, the inner grid is **two columns** (typically
+  `cols="1fr 1fr"` for Morning / Afternoon, or `cols="repeat(N, 1fr)"`
+  for finer sub-divisions) — never `auto-fit`, because the temporal
+  alignment depends on a fixed number of columns.
+- The "current" phase uses the `active` tint to indicate "you are
+  here"; past phases use `primary`; future phases use `accent` or a
+  muted variant.
+- All other INVARIANTS still apply: each phase has its header, all
+  cards in a phase share the same tint, phases are stacked vertically.
+
+Currently applied in ai4se6d as:
+- `modules/ai4se6d_genai_intro/blocks/bck_intro_roadmap.py` (3-day
+  schedule with the "current" day highlighted)
+- `modules/ai4se6d_gensem/blocks/bck_gensem_roadmap.py`
+- `modules/ai4se6d_gensem/blocks/bck_gensem_fw_agilegen_roadmap.py`
+
+Do not use this variant for non-temporal groupings — the temporal
+alignment guarantee only matters when phases follow each other in time.
 
 ## Examples
 

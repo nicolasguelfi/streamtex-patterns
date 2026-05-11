@@ -107,6 +107,11 @@ def build():
 - `toc_lvl` follows the document structure (`"1"`, `"+1"`, `"+2"`, etc.).
 - The right cell can be left empty (no tooltip) for slides that don't
   need presenter notes — keep the 95/5 grid for layout consistency.
+- **Tooltip-rich variant** (≈ 56% of slides in ai4se6d's GenSEM
+  module): the tooltip carries a structured recap of the slide's key
+  points (3 to 5 entries, each `("<Label>", "<one-line body>")`). The
+  variant is the same pattern — only the density and number of tooltip
+  entries grow. No new structural change.
 
 ### INTERDITS (forbidden)
 

@@ -18,15 +18,18 @@ lists every pattern with its scope and a short description.
 | ptn_card_grid | core | Grid of equal-size cards with title and body | grid, cards, taxonomy | ✓ |
 | ptn_comparison_table | core | Multi-column comparison table with header row and aligned rows | grid, table, comparison | ✓ |
 | ptn_takeaways | core | Numbered list of 3–5 key takeaways with bold lead and explanation | list, summary, conclusion | ✓ |
+| ptn_term_definition_list | core | Vertical list of `term — definition` rows for glossaries, notations, abbreviation tables | list, glossary, reference, definitions | ✓ |
 | ptn_title_slide | slides | Title slide with hero image, title, subtitle, and author | template, title, slide | ✓ |
 | ptn_stat_hero | slides | Slide centerpiece — a single oversized statistic with body and source | stat, evidence, hero | ✓ |
 | ptn_evidence_insight | slides | Slide template combining stat hero, body, takeaways, and source | template, evidence, slide | ✓ |
 | ptn_exercise_flow | slides | Slide template for timed exercises — briefing, action, debrief | template, exercise, practice, slide | ✓ |
 | ptn_categorized_grid | slides | Grid of cards organised in named categories with category headers | grid, cards, categories, taxonomy | ✓ |
+| ptn_narrative_transition | slides | Bridge slide pivoting from a problem state to the proposed solution / methodology | template, narrative, transition, slide | ✓ |
 | ptn_manual_section | docs | Documentation section — heading + sub + explanation + code snippet + live demo | docs, manual, demo, code | ✓ |
 | ptn_feature_walkthrough | docs | Multi-step feature presentation with numbered steps | docs, manual, walkthrough, tutorial | ✓ |
 | ptn_api_reference_card | docs | Reference card for one StreamTeX API function | docs, api, reference | ✓ |
 | ptn_composite_block | docs | Composite block aggregating several atomic sub-blocks via st_include | docs, manual, composition, atomic | ✓ |
+| ptn_transition_gse | projects/ai4se6d | ai4se6d-specific transition slide pivoting a section into the GSE-One methodology | template, narrative, transition, slide, ai4se6d, gse-one | ✗ |
 <!-- END AUTO -->
 
 ## Presets

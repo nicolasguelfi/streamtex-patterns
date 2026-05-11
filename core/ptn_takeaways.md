@@ -115,6 +115,27 @@ def build():
 - Slide may follow a `ptn_cite` after the punch line if it summarizes
   evidence.
 
+- The whole block is paginated via `st_slide_break(marker_label="…")`
+  between each sub-recap.
+- Each sub-slide is a regular `ptn_takeaways` (3 to 5 numbered
+  insights), optionally preceded by a `ptn_slide_heading` naming the
+  sub-section being recapped.
+- The **final** sub-slide is a single-line "key message" slide using
+  `s.Giant + s.bold + s.center_txt + s.project.colors.highlight`. It
+  acts as the punch line of the whole multi-slide recap.
+- Each sub-recap's lead-in uses an *inline emphasis variant*
+  (`keyword`, `keyword_warn`, `keyword_accent`) keyed to the sub-section
+  semantics — so the eye groups items per recap.
+
+All INVARIANTS still apply per sub-slide. Do not collapse the
+multi-slide recap into a single dense slide — the pagination is what
+gives each sub-recap its own pedagogical beat.
+
+Currently applied in ai4se6d as:
+- `modules/ai4se6d_vibecoding/blocks/bck_recap.py`
+- `modules/ai4se6d_gensem/blocks/bck_gensem_recap_v060.py`
+- `modules/ai4se6d_gensem/blocks/bck_gensem_calcapp_recap.py`
+
 ### INTERDITS (forbidden)
 
 - Do not use 6+ items — that defeats the "key takeaways" intent.
@@ -141,6 +162,34 @@ def build():
   separate slides.
 - Sequence of steps in a procedure → use `st_list` with non-numbered
   styling.
+
+## Variants
+
+### Multi-slide recap variant
+
+Used when a whole section needs to be recapped at the end (typically
+3 to 8 sub-recaps spread across as many sub-slides):
+
+- The whole block is paginated via `st_slide_break(marker_label="…")`
+  between each sub-recap.
+- Each sub-slide is a regular `ptn_takeaways` (3 to 5 numbered
+  insights), optionally preceded by a `ptn_slide_heading` naming the
+  sub-section being recapped.
+- The **final** sub-slide is a single-line "key message" slide using
+  `s.Giant + s.bold + s.center_txt + s.project.colors.highlight`. It
+  acts as the punch line of the whole multi-slide recap.
+- Each sub-recap's lead-in uses an *inline emphasis variant*
+  (`keyword`, `keyword_warn`, `keyword_accent`) keyed to the sub-section
+  semantics — so the eye groups items per recap.
+
+All INVARIANTS still apply per sub-slide. Do not collapse the
+multi-slide recap into a single dense slide — the pagination is what
+gives each sub-recap its own pedagogical beat.
+
+Currently applied in ai4se6d as:
+- `modules/ai4se6d_vibecoding/blocks/bck_recap.py`
+- `modules/ai4se6d_gensem/blocks/bck_gensem_recap_v060.py`
+- `modules/ai4se6d_gensem/blocks/bck_gensem_calcapp_recap.py`
 
 ## Examples
 

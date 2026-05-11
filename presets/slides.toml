@@ -9,6 +9,7 @@ include = [
   "slides/ptn_evidence_insight.md",
   "slides/ptn_exercise_flow.md",
   "slides/ptn_categorized_grid.md",
+  "slides/ptn_narrative_transition.md",
 ]
 exclude = []
 

@@ -11,6 +11,7 @@ include = [
   "core/ptn_card_grid.md",
   "core/ptn_comparison_table.md",
   "core/ptn_takeaways.md",
+  "core/ptn_term_definition_list.md",
 ]
 exclude = []
 
