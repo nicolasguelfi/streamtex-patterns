@@ -196,8 +196,10 @@ Currently applied in ai4se6d as:
 Live demo and gallery blocks (in the `stx_manual_patterns` documentation
 manual):
 
-- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_lists.py` — `takeaways` with numbered items
-  and `label` + `keyword` lead-ins.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_lists.py`
+  — `takeaways` with numbered items and `label` + `keyword` lead-ins,
+  plus the **multi-slide recap variant** rendered as 3 side-by-side
+  sub-recaps followed by a single-line key message.
 
 Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 

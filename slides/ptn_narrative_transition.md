@@ -179,10 +179,17 @@ def build():
 
 ## Examples
 
-Used in `ai4se6d` to bridge GenSEM evidence into the GSE-One method;
-the project-specific variant is documented in
-`projects/ai4se6d/ptn_transition_gse.md` and applied in four blocks of
-the GenSEM module.
+Live demo blocks (in the `stx_manual_patterns` documentation manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_narrative_transition.py`
+  — full live demo with the asymmetric 2-column layout and the
+  `→`-bearing pivot line.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
+
+The project-specific variant is documented in
+`projects/ai4se6d/ptn_transition_gse.md` and applied in four blocks
+of the GenSEM module.
 
 ## Related patterns
 

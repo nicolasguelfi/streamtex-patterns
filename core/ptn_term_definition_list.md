@@ -154,9 +154,18 @@ def build():
 
 ## Examples
 
-Used in 4 ai4se6d glossaries (one per module + a shared cross-module
-glossary). All four glossaries share an identical structure — this
-pattern formalises that structure.
+Live demo and gallery blocks (in the `stx_manual_patterns`
+documentation manual):
+
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_gallery_lists.py`
+  — `term_definition_list` section with a 5-entry glossary rendered
+  with the canonical `(term, separator, definition)` tuple layout.
+
+Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
+
+Also applied in four `ai4se6d` glossary blocks (one per module + a
+shared cross-module glossary) — the pattern formalises a structure
+that was already used identically across the collection.
 
 ## Related patterns
 

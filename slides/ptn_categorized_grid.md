@@ -249,8 +249,11 @@ alignment guarantee only matters when phases follow each other in time.
 
 Live demo blocks (in the `stx_manual_patterns` documentation manual):
 
-- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_categorized_grid.py` — three named categories,
-  each with its own tint and an inner grid of cards.
+- `streamtex-docs/manuals/stx_manual_patterns/blocks/bck_demo_categorized_grid.py`
+  — three named categories, each with its own tint and an inner grid
+  of cards, plus the **sequence / timeline variant** rendered as a
+  3-phase course schedule (Day 1 / Day 2 / Day 3) with the current
+  day highlighted.
 
 Run the manual locally with `./run-manuals.sh --patterns` (port 8508).
 
