@@ -9,8 +9,9 @@ editing StreamTeX blocks, and the AI is then expected to reproduce or
 extrapolate from them.
 
 This repo is the **single source of truth** for the StreamTeX ecosystem.
-Projects install patterns via the `stx patterns` CLI (or, in phase 1,
-manually following the same conventions).
+Projects install patterns via the `stx patterns` CLI — interactively or
+declaratively, never automatically. Pattern selection is *subjective*: an
+empty project starts with zero patterns and the user picks what fits.
 
 ---
 
@@ -74,28 +75,81 @@ example.
 
 ## Installation in a project
 
-Once `stx patterns` is implemented in the StreamTeX CLI:
+Two paths get patterns into a project — pick one.
+
+### A) Interactive picker (recommended on a TTY)
 
 ```bash
-# Install a preset (recommended)
-stx patterns install --preset slides
-stx patterns install --preset docs
+# Open a checkbox-style multi-select grouped by scope.
+# Already-installed patterns are pre-checked; re-run any time to revisit.
+stx patterns install
 
-# Or pick individual patterns
+# Narrow the picker with a frontmatter tag (case-insensitive).
+stx patterns install --tag slide
+```
+
+Non-TTY contexts (CI, scripts) refuse this form with a clear error — use
+the explicit flags below.
+
+### B) Declarative flags (composable)
+
+`--preset`, `--pattern`, and `--exclude` can be combined in any way.
+`--all` is exclusive with `--preset` and `--pattern` (but still accepts
+`--exclude`).
+
+```bash
+# A single preset
+stx patterns install --preset slides
+
+# Multiple presets at once (their patterns union together)
+stx patterns install --preset slides --preset docs
+
+# A preset PLUS extra individuals
+stx patterns install --preset slides --pattern ptn_inline_emphasis
+
+# A preset MINUS some patterns
+stx patterns install --preset slides --exclude ptn_takeaways
+
+# Everything except a few
+stx patterns install --all --exclude ptn_takeaways,ptn_categorized_grid
+
+# Hand-picked list (no preset)
 stx patterns install --pattern ptn_slide_heading,ptn_callout,ptn_stat_hero
 
-# Update (with drift detection)
-stx patterns update
+# Positional names also work (equivalent to --pattern)
+stx patterns install ptn_slide_heading ptn_callout
+```
 
-# Status
-stx patterns status
+### Lifecycle
 
-# Promote a local edit back to this repo
-stx patterns promote ptn_callout
+```bash
+stx patterns status                # drift between installed copy and source
+stx patterns sync                  # apply recorded intent on a fresh clone
+stx patterns update                # pull source-side updates (drift-aware)
+stx patterns diff ptn_callout      # local-vs-source for one pattern
+stx patterns remove ptn_callout    # uninstall one pattern
+stx patterns promote ptn_callout   # push a local edit back to this repo
 ```
 
 The CLI copies patterns into `<project>/.claude/custom/streamtex-patterns/`
-and tracks origin/SHA in `.patterns-meta.json`.
+and records two things:
+
+* `.patterns-meta.json` — execution cache (SHA per pattern, drift baseline).
+* `<project>/stx.toml [patterns.selection]` — your *intent* (preset name,
+  hand-picked list, or `all`). Versioned with the project, so a fresh
+  `git clone` followed by `stx patterns sync` rebuilds the same set.
+
+### Bootstrap from a fresh project
+
+When you scaffold a project with `stx install --project <name>` and no
+patterns source is yet reachable, an **opt-in prompt** offers to clone
+the official patterns repo into the workspace, then to open the picker.
+Both questions default to NO; pass `--no-patterns` to skip them entirely
+(also skipped silently in CI / non-TTY).
+
+```bash
+stx install --project hello --no-patterns   # don't ask about patterns
+```
 
 ### Source resolution (no env var)
 
@@ -106,23 +160,60 @@ environment variable, by design — keeps state in files for portability):
 2. `[patterns].source` in `<project>/stx.toml` or `pyproject.toml`
 3. `[patterns].source` in `<workspace>/stx.toml`
 4. Auto-discover: `<workspace>/streamtex-patterns/`
-5. Otherwise: error with the list of paths tried.
+5. Otherwise: error with the per-level trace + a hint.
+
+Use the `source` subgroup to inspect or change the resolution:
+
+```bash
+# Show what each R4 level probed (great for debugging "source not found")
+stx patterns source show
+
+# Clone the official repo into the workspace (R4 level 4)
+stx patterns source clone
+
+# Symlink to an existing clone (share one checkout across workspaces)
+stx patterns source link /path/to/my/streamtex-patterns
+
+# Record a custom path in stx.toml without cloning
+stx patterns source set ../shared/patterns
+```
 
 Example workspace config (`streamtex-dev/stx.toml`):
 
 ```toml
 [patterns]
 source = "./streamtex-patterns"
-default_preset = "slides"
+
+[patterns.selection]
+mode = "preset"
+items = ["slides"]
 ```
 
-Example project config (`projects/ai4se6d/stx.toml`):
+Example project config (`projects/ai4se6d/stx.toml`) — composite selection:
 
 ```toml
 [patterns]
 source = "../../streamtex-patterns"
-preset = "ai4se6d"
+
+[patterns.selection]
+presets = ["slides", "docs"]            # multiple presets are unioned
+individuals = ["ptn_inline_emphasis"]   # extra patterns on top
+excludes = ["ptn_takeaways"]            # subtracted from the union
+all = false                             # true = "every pattern, subject to excludes"
 ```
+
+Hand-edited shortcuts are accepted on read (the canonical sub-table form
+is restored on the next `stx patterns install`):
+
+```toml
+[patterns]
+preset = "slides"         # → presets=["slides"]
+selected = ["ptn_x"]      # → individuals=["ptn_x"]
+all = true                # → all=true
+```
+
+The old v2 shape (`mode = "..."` + `items = [...]`) is also accepted on
+read and silently migrated to the v3 composite form on the next write.
 
 ---
 
